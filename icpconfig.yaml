@@ -1,22 +1,53 @@
 apiVersion: v1
 clusters:
 - cluster:
+    certificate-authority-data: DATA+OMITTED
+    server: https://azcluster-dns-c5caac81.hcp.southindia.azmk8s.io:443
+  name: azcluster
+- cluster:
     insecure-skip-tls-verify: true
-    server: https://9.199.145.184:8001
-  name: mycluster
+    server: https://172.16.70.57:8001
+  name: ilon1
+- cluster:
+    certificate-authority-data: DATA+OMITTED
+    server: https://sumitakscl-sumit-1325be-b1b9c6ea.hcp.southindia.azmk8s.io:443
+  name: sumitakscluster
 contexts:
 - context:
-    cluster: mycluster
-    namespace: namespace-user1
-    user: user1
+    cluster: azcluster
+    user: clusterUser_sumit_azcluster
+  name: azcluster
+- context:
+    cluster: ilon1
+    namespace: namespace03
+    user: user3
+  name: ilon1-context
+- context:
+    cluster: ""
+    namespace: namespace3
+    user: ""
   name: mycluster-context
-current-context: mycluster-context
+- context:
+    cluster: sumitakscluster
+    user: clusterUser_sumit_sumitakscluster
+  name: sumitakscluster
+current-context: ilon1-context
 kind: Config
 preferences: {}
 users:
-- name: admin
+- name: clusterUser_sumit_azcluster
   user:
-    token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdF9oYXNoIjoiMmZmNzNlMmMzMjdmNjFiOGZhNGY4NjYzMjViYmNjNmNjZTk3M2VlZSIsInJlYWxtTmFtZSI6ImN1c3RvbVJlYWxtIiwidW5pcXVlU2VjdXJpdHlOYW1lIjoiYWRtaW4iLCJpc3MiOiJodHRwczovL215Y2x1c3Rlci5pY3A6OTQ0My9vaWRjL2VuZHBvaW50L09QIiwiYXVkIjoiMGQ5Y2YyZDEyNTdkMDJhMTA0ZGU0NDkxODE5ZjIzMWMiLCJleHAiOjE1NTg1NTMwODksImlhdCI6MTU1ODUyNDI4OSwic3ViIjoiYWRtaW4iLCJ0ZWFtUm9sZU1hcHBpbmdzIjpbXX0.lLFLcQz9KHrCKip5siGQwTdMHr-lgs6aZ5n4EwfjIa1R9_pztezf9MuxTMW2c9GeCkIMcGHf4W_37LAB2npZvDDQRcpo2xS7i8Z0ZUhRUGF0hXM7vo-EM_BX-UwkfCEAURx1Ao90z7uz_6SfVEy4o3pqBmAFowBzn2wsXLiuEi150o0zSe0iML13oePX0VPwBeh3De3sOBrfwcOkhZQwEk750QVdIO0XcgI_zfKo1gjRqWReSRseEHmgWKfgBLmRulmSP1kazpGF7xQxh_cqphJplc4Pbr4NxuM7HRT2V_rt-xcwX4c9QoTfghzyzbH3Z7lqnYvDJPqGk2JzYMIuEw
-- name: user1
+    client-certificate-data: REDACTED
+    client-key-data: REDACTED
+    token: a49f2ce1550fe9628c45242db56772b5
+- name: clusterUser_sumit_sumitakscluster
   user:
-    token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdF9oYXNoIjoiODgyODQzOWUxMGViM2VlYjgzYWY2MDhlY2ZjNTQ0NWZkZTg0ZTU3YSIsInJlYWxtTmFtZSI6ImN1c3RvbVJlYWxtIiwidW5pcXVlU2VjdXJpdHlOYW1lIjoidXNlcjEiLCJpc3MiOiJodHRwczovL215Y2x1c3Rlci5pY3A6OTQ0My9vaWRjL2VuZHBvaW50L09QIiwiYXVkIjoiZDdiNTg4ODI3ZmU4NzZmYjY0NzQyZjc1Mjk4MTNjNDAiLCJleHAiOjE1NTg2MTU2OTgsImlhdCI6MTU1ODU4Njg5OCwic3ViIjoidXNlcjEiLCJ0ZWFtUm9sZU1hcHBpbmdzIjpbImljcDp0ZWFtLXVzZXItMTphZG1pbiIsImljcDpkZWZhdWx0Om1lbWJlciIsImljcDpkZWZhdWx0OnRlYW1hZG1pbiJdfQ.HujBYeyVSF-1I9ymTO8r3ERsuimlFSaqWUEH6hk6XqROtF1JDueCXhhwOQWwDxqWJdambGE_M3RZj3NO7heTdeIYejKKhK8Ga1GeBVekRoMz72q2dckErAHgfbYGOwP1q2Z3uittqwGLznt8VFY07Ggedfpjh5kSqChEIhKeP1gDzfM-R2v6kqVjg4J5x8X5qGI8uhbvflg18FCASKJQXtnpRTncJsdycl7VA55byrvK7FRJaJA10yJhTGVmdTqWDygtu3bkPKVPMQPuHzBIflJ-mylM0n2PCQdLAJaW9q99EzTPnGoiB43NjXHpiGZj3arS4J6CIrffErKfTqhGwA
+    client-certificate-data: REDACTED
+    client-key-data: REDACTED
+    token: 2dbc7edb2e6c143914aaaaeb36125af9
+- name: ilon1-user
+  user:
+    token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdF9oYXNoIjoiNDBjOWUxYjY0MGNiYzg4ZDM2YTZmNWUyYjIxNzcyNWRhMDg1Nzc5YiIsInJlYWxtTmFtZSI6ImN1c3RvbVJlYWxtIiwidW5pcXVlU2VjdXJpdHlOYW1lIjoidXNlcjMiLCJpc3MiOiJodHRwczovL2lsb24xLmljcDo5NDQzL29pZGMvZW5kcG9pbnQvT1AiLCJhdWQiOiJkMGIwOGIzZGQxYWUzM2FlNWRhNTE1YzQwZGRhYWZlYyIsImV4cCI6MTU1OTEzMzE3NywiaWF0IjoxNTU5MTA0Mzc3LCJzdWIiOiJ1c2VyMyIsInRlYW1Sb2xlTWFwcGluZ3MiOlsic3lzdGVtOm1hc3RlcnMiXX0.XOA2-tp3rILAff_iWT9d5nUa_oFkoqpOdTGyrnykmSmRmrAcoUQAl6fM1zCe4qAI8rS41e1abNcEj2zt_akyQJen_N1-kpiFn-ujE6fTs1r2_yWcNY7n6SO9auexXqMocOeIiOnaKtvEdRUifV802m8uxOkwcoel4AKo55iihVoNme0vjzuErCRLlU6Xj7vw_CO4ih_SG2n8G183LBx5tcMEK8xViTJFh1-zAcjbgrXmmKKS-ZK9Uzx0tS0ZlF18h4Jc6Lm2_HhA845LrzBPOZwfAI-ttcH2qf17R3LSEo4WqLf31D2RbQOQZf2kbSnN7FnYrhqB6uoVgU7aVQsqlg
+- name: user3
+  user:
+    token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdF9oYXNoIjoiZDBkNmQ3MzcxODhkNDI4OTdiMTg1MjVjZWNhM2NlMTRkYWExNDM2NyIsInJlYWxtTmFtZSI6ImN1c3RvbVJlYWxtIiwidW5pcXVlU2VjdXJpdHlOYW1lIjoidXNlcjMiLCJpc3MiOiJodHRwczovL2lsb24xLmljcDo5NDQzL29pZGMvZW5kcG9pbnQvT1AiLCJhdWQiOiJkMGIwOGIzZGQxYWUzM2FlNWRhNTE1YzQwZGRhYWZlYyIsImV4cCI6MTU1OTE1MzYyMywiaWF0IjoxNTU5MTI0ODIzLCJzdWIiOiJ1c2VyMyIsInRlYW1Sb2xlTWFwcGluZ3MiOlsic3lzdGVtOm1hc3RlcnMiXX0.CmOp_QNpL7x3sDS4cKHqjg05EtiyBDkd2C7UaXWNxYKK-FTG8CpFiOAl2jCEo_qtZ0y9Ktl-LuBgb1BBQVJGd_G7Tm5bw09EkdMN0B9rm130y6B804hDdkbQvLFgqicHpX4ZoeJSXe412zFGVhiXex8BOuWg84YAAiANjXEHz1bONXQ611keek33WMcNE-0BSP73v09WesBxIYf8AfOwN2uZp5AC3NZxjhraR-tBuzGhbGHTOEMWqY5l3IU4IRhNlD81MiR1YPwy1OV2XsX9xIrocSW3UX9d2HadXcEQxmKMkTJIj8xvvyU36U058OYr3NvT93BQSzPF7WDDkZ8tjw
